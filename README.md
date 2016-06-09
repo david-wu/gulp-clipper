@@ -12,7 +12,7 @@ Clip text from your code and puts it into JavaScript variables.
 
 ### Usage
 
-```
+```javascript
 @gulpClipperStart:funkyFunc:
 function test(){
 	console.log('heres how this function works', window.gulpClips.funkyFunc);
@@ -23,7 +23,7 @@ test();
 ```
 
 output:
-```
+```javascript
 'function test(){\n\tconsole.log('heres how this function works', window.gulpClips.funkyFunc);\n}'
 ```
 
@@ -32,7 +32,7 @@ output:
 `npm install --save-dev gulp-clipper`
 
 gulpfile.js
-```
+```javascript
 var gulp = require('gulp');
 var clipper = require('gulp-clipper');
 
@@ -44,7 +44,7 @@ gulp.task('gulpClips', function(){
 ```
 
 index.html
-```
+```html
 <html>
 	<body>
 		<script src="gulpClip.js"></script>
