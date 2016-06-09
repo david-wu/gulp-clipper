@@ -39,7 +39,7 @@ var clipper = require('gulp-clipper');
 gulp.task('gulpClips', function(){
     gulp.src(['./**/*'])
         .pipe(clipper('gulpClips.js'))
-        .pipe(gulp.dest('./assets'))
+        .pipe(gulp.dest('./'))
 });
 ```
 
