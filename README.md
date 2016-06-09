@@ -24,7 +24,7 @@ test();
 
 output:
 ```javascript
-'function test(){\n\tconsole.log('heres how this function works', window.gulpClips.funkyFunc);\n}'
+'function test(){\n\tconsole.log(\'heres how this function works\', window.gulpClips.funkyFunc);\n}'
 ```
 
 ### Setup
