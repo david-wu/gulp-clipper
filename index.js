@@ -2,9 +2,12 @@ var _ = require('lodash');
 var path = require('path');
 var through = require('through2');
 
-function gulpClipper(fileName){
+module.exports = gulpClipper;
 
-    var clipper = new Clipper();
+function gulpClipper(fileName, options){
+    fileName = fileName || 'gulpClips.js';
+    var clipper = new Clipper(options);
+
     var latestFile;
 
     function populateClips(file, encoding, cb){
@@ -15,7 +18,7 @@ function gulpClipper(fileName){
         }
         file.clipped = true;
 
-        clipper.clipString(''+file.contents);
+        clipper.processString(''+file.contents);
 
         return cb();
     }
@@ -50,13 +53,13 @@ function Clipper(options){
 }
 
 Clipper.prototype = {
-    clipString: function(string){
+    processString: function(string){
         _.each(string.split('\n'), (line)=>{
-            this.clipLine(line);
+            this.processLine(line);
         });
         this.clearActiveClips();
     },
-    clipLine: function(line){
+    processLine: function(line){
         this.removeActiveClips(line);
         _.each(this.activeClips, (isActiveClip, clipTag)=>{
             this.clips[clipTag] = this.clips[clipTag] || [];
@@ -65,15 +68,15 @@ Clipper.prototype = {
         this.addActiveClips(line);
     },
     removeActiveClips: function(line){
-        var stopClippingTag = _.get(this.stopRe.exec(line), '1');
-        if(stopClippingTag){
-            delete this.activeClips[stopClippingTag];
+        var stopClippingKey = _.get(this.stopRe.exec(line), '1');
+        if(stopClippingKey){
+            delete this.activeClips[stopClippingKey];
         }
     },
     addActiveClips: function(line){
-        var startClippingTag = _.get(this.startRe.exec(line), '1');
-        if(startClippingTag){
-            this.activeClips[startClippingTag] = true;
+        var startClippingKey = _.get(this.startRe.exec(line), '1');
+        if(startClippingKey){
+            this.activeClips[startClippingKey] = true;
         }
     },
     clearActiveClips: function(){
@@ -85,5 +88,3 @@ Clipper.prototype = {
         });
     }
 }
-
-module.exports = gulpClipper;
