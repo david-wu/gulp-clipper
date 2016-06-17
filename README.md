@@ -13,18 +13,18 @@ Clip text from your code and puts it into JavaScript variables.
 ### Usage
 
 ```
-@gulpClipperStart:funkyFunc:
+// @gulpClipperStart:funkyFunc:
 function test(){
-	console.log('heres how this function works', window.gulpClips.funkyFunc);
+	console.log(window.gulpClips.funkyFunc);
 }
-@gulpClipperStop:funkyFunc:
+// @gulpClipperStop:funkyFunc:
 
 test();
 ```
 
 output:
 ```
-'function test(){\n\tconsole.log('heres how this function works', window.gulpClips.funkyFunc);\n}'
+'function test(){\n\tconsole.log(window.gulpClips.funkyFunc);\n}'
 ```
 
 ### Setup
@@ -47,7 +47,7 @@ index.html
 ```
 <html>
 	<body>
-		<script src="gulpClip.js"></script>
+		<script src="gulpClips.js"></script>
 	</body>
 </html>
 ```
